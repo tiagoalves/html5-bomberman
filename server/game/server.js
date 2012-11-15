@@ -79,6 +79,7 @@ require("./player.js");
 
             // wait for join
             socket.on('join', _.bind(function(d) {
+                
                 var name = d.name;
 
                 redis.incr("counters.joined-players");
