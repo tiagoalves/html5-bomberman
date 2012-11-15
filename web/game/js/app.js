@@ -19,9 +19,45 @@ require.config(
 require([
     "jquery", "underscore", "backbone",
     "polyfills/jscript",
-    "facebook",
-    "lobby"
+    //"facebook",
+    //"lobby"
+    "Game"
 ],function($, _, Backbone, core) {
+
+
+
+    var startGame = function(/*e*/) {
+
+        //character: "mary"
+        //fbuid: undefined
+        //game: "game1"
+        //playerName: "Tiago
+
+        var name = 'Tiago Alves';
+        var game = 'game1';
+        var character = 'mary';
+
+        //localStorage.setItem("userName", name);
+        //localStorage.setItem("character", character);
+
+        console.log("Joining " + game);
+
+        if (name.length==0) {
+            //alert("Please enter a name.");
+            console.log("Please enter a name.");
+            return;
+        }
+
+        $("#lobby").hide();
+        $("#game").show();
+
+        new Game({
+            playerName: name,
+            fbuid: undefined,
+            character: character,
+            game: game
+        });
+    }
 
 
     /**
@@ -29,13 +65,14 @@ require([
      */
     $(function() {
 
-        new LobbyView({el: $("#lobby")});
+        //new LobbyView({el: $("#lobby")});
 
         $("#loading").hide();
-
+        startGame();
 
 
     });
+
 
 });
 

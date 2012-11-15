@@ -41,6 +41,7 @@ define([
             // keyboard handlers
             this.$document.keydown($.proxy(this.onKeyDown, this));
             this.$document.keyup($.proxy(this.onKeyUp, this));
+
         },
 
         onKeyDown: function(e) {
