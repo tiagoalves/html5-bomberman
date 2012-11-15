@@ -76,6 +76,8 @@ http.post("/", function(req,res,next) {
     res.redirect(req.url);
 });
 http.get('*',function(req,res) {
+    //res.redirect('localhost:8000'+req.url);
+    //res.redirect(req.url);
     res.redirect('https://www.playshortfuse.com'+req.url);
 })
 http.listen(8000);

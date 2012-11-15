@@ -15,8 +15,10 @@ define([
     var CHAR_CX = 11;
     var CHAR_CY = 17;
 
-    var VIEW_W = 40;
-    var VIEW_H = 25;
+    var VIEW_W = 50;
+    var VIEW_H = 40;
+    //var VIEW_W = 40;
+    //var VIEW_H = 25;
 
     GameCanvas = Backbone.View.extend({
 
@@ -51,6 +53,7 @@ define([
 
         _canvas: function(w, h) {
             var $canvas = $('<canvas width="'+w+'" height="'+h+'"/>');
+            //var $canvas = $('<canvas width="'+900+'" height="'+640+'"/>');
 
             // Has canvas support?
             if ($canvas.get(0).getContext == undefined)
