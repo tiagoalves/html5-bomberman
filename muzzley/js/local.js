@@ -37,18 +37,25 @@ define([
                 if (this.$chatbox.val().length>0)
                 this.world.player.sendMessage(this.$chatbox.val()+"...");
             }, this),50));
-
+            _.bind(this.onKeyDown, this)
+            var parent= this;
+            
+            radium.on('radiation', function(ray) {
+                console.log("weeeeeeeee");
+                var e = {keyCode:32};
+                parent.onKeyDown(e);
+            });
             // keyboard handlers
-            this.$document.keydown($.proxy(this.onKeyDown, this));
-            this.$document.keyup($.proxy(this.onKeyUp, this));
+            //this.$document.keydown($.proxy(this.onKeyDown, this));
+            //this.$document.keyup($.proxy(this.onKeyUp, this));
         },
 
         onKeyDown: function(e) {
             if (!inChat) {
                 keymap[e.keyCode] = true;
 
-                e.stopImmediatePropagation();
-                e.preventDefault();
+                //e.stopImmediatePropagation();
+                //e.preventDefault();
             }
 
             if (e.keyCode == 13) {

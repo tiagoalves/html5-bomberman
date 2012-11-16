@@ -39,6 +39,19 @@ requirejs(['js/app'],
     //console.log(app);
 });
 
+
+var EventEmitter = require('events').EventEmitter;
+radium = new EventEmitter();
+
+radium.on('radiation', function(ray) {
+    console.log(ray);
+});
+
+setTimeout(function() {
+    radium.emit('radiation', 'GAMMA');
+}, 5000);
+
+
 setTimeout(function() {
   keySimulator.keydown(KeySimulator.UP);
 }, 1000);
