@@ -22,6 +22,9 @@ define([
             this.world = new World({ container: $("#view") });
             this.keySimulator = opt.keySimulator;
 
+
+            console.log("--------  CREATING A NEW WORLD ---------------");
+
             // create our player
             this.world.player = new Character({
                 name: opt.playerName,

@@ -19,8 +19,8 @@ define([
 
             this.world.placeBombs.on('add', this.requestPlaceBomb, this);
 
-            this.socket = io.connect('https://localhost:8443/' + opt.game);
-            
+            this.socket = io.connect('https://localhost:8443/' + opt.game, {'force new connection': true});
+
             this.socket.on('disconnect', $.proxy(this.onDisconnect, this));
 
             this.socket.on('game-info', $.proxy(this.onGameJoin, this));
@@ -55,7 +55,7 @@ define([
             $('#waitserver').hide();
 
             this.id = d.your_id;
-            console.log("Welcome to game " + d.game + " (my id = " + this.id + ")");
+            console.log("ooooo  Welcome to game " + d.game + " (my id = " + this.id + ")");
 
             this.socket.emit('join', {
                 id: this.id,
@@ -93,8 +93,14 @@ define([
                 score: d.score,
                 fbuid: d.fbuid
             });
+
+            console.log("Creating character (my id: " + this.id + "):");
+            console.log(d);
+
             console.log(d.name + " #" + d.id + " joined", c);
-            this.world.players.add(c);
+            try {
+                this.world.players.add(c);               
+            } catch (err) {}
             this.peers[d.id] = c;
         },
 
