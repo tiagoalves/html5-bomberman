@@ -23,7 +23,7 @@ require([
 ],function($, _, Backbone, core) {
 
 
-
+    
     var startGame = function(/*e*/) {
 
         //character: "mary"

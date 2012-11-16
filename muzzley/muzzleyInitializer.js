@@ -1,3 +1,4 @@
+var events = require('events');
 var util = require('util');
 var requirejs = require('requirejs');
 var KeySimulator = require('./KeySimulator');
@@ -23,33 +24,60 @@ chat = function() {};
 // Play sound...
 play = function() {};
 
-requirejs.config({
-  baseUrl: __dirname,
-  //Pass the top-level main.js/index.js require
-  //function to requirejs so that node modules
-  //are loaded relative to the top-level JS file.
-  nodeRequire: require
+TILE_EMPTY = 0;
+TILE_BRICK = 1;
+TILE_SOLID = 2;
+
+requirejs.config(
+    {
+        baseUrl: "js",
+        paths: {
+            "backbone": "lib/backbone",
+            "underscore": "lib/underscore",
+            "text": "lib/text"
+        },
+        locale: "en"
+    }
+);
+
+
+requirejs([
+    "jquery", "underscore", "backbone",
+    "polyfills/jscript",
+    "Game"
+],function($, _, Backbone, core) {
+
+var startGame = function(/*e*/) {
+
+    
+        var name = 'Muzzley';
+        var game = 'game1';
+        var character = 'mary';
+
+        console.log("Joining " + game);
+
+        new Game({
+            playerName: name,
+            fbuid: undefined,
+            character: character,
+            game: game
+        });
+    }
+
+
+    /**
+     * Initialize
+     */
+    $(function() {
+
+        startGame();
+
+
+    });
+
+
 });
 
-requirejs(['js/app'],
-  function (app) {
-    //foo and bar are loaded according to requirejs
-    //config, but if not found, then node's require
-    //is used to load the module.
-    //console.log(app);
-});
-
-
-var EventEmitter = require('events').EventEmitter;
-keyEvent = new EventEmitter();
-
-radium.on('radiation', function(ray) {
-    console.log(ray);
-});
-
-setTimeout(function() {
-    radium.emit('radiation', 'GAMMA');
-}, 5000);
 
 
 setTimeout(function() {
