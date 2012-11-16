@@ -78,7 +78,9 @@ define([
         },
 
         _setMap: function(x, y, v, arr) {
-            arr[ (y - this.y) * this.w + (x - this.x) ] = v;
+            if (arr) {
+                arr[ (y - this.y) * this.w + (x - this.x) ] = v;
+            }
         },
 
         setTile: function(x, y, c) {
