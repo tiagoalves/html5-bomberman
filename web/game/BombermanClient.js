@@ -23,6 +23,8 @@ chat = function() {};
 // Play sound...
 play = function() {};
 
+console.log(".. " + __dirname);
+
 var BombermanClient = function () {
   requirejs.config({
     baseUrl: __dirname,
@@ -38,12 +40,12 @@ var BombermanClient = function () {
 BombermanClient.prototype.keySimulator = keySimulator;
 
 setTimeout(function() {
-  keySimulator.keydown(KeySimulator.UP);
+//  keySimulator.keydown(KeySimulator.UP);
 }, 1000);
 
 setTimeout(function() {
-  keySimulator.keyup(KeySimulator.UP);
-  keySimulator.keydown(KeySimulator.LEFT);
+//  keySimulator.keyup(KeySimulator.UP);
+//  keySimulator.keydown(KeySimulator.LEFT);
 }, 5000);
 
 exports = module.exports = BombermanClient;
