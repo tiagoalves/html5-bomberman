@@ -105,28 +105,14 @@ define([
                     var item = $(this);
                     var user_id = item.data('id');
 
-                    FB.ui( {
-                        method: 'apprequests',
-                        title: 'Challenge friend',
-                        message: 'You have been challenged to a game of Short Fuse! Do you think you can handle it?',
-                        to: user_id
-                    }, function(res) {
-                        if (!res) return;
-                        console.log(res);
-                        $(".who", item).text("Challenged!");
-                        item.addClass("challenged");
-                    });
+                   
                 });
 
             $("#multi-challenge").click(function() {
                 var item = $(this);
 
                 // FIXME DRY as above (except :to)
-                FB.ui( {
-                    method: 'apprequests',
-                    title: 'Challenge friend',
-                    message: 'You have been challenged to a game of Short Fuse! Do you think you can handle it?',
-                });
+               
             });
 
             _.defer(_.bind(this.refreshFriends, this));
@@ -134,27 +120,7 @@ define([
         },
 
         refreshFriends: function() {
-            FB.api({
-                    method: 'fql.query',
-                    query: 'SELECT uid, name FROM user WHERE uid IN ( SELECT uid2 FROM friend WHERE uid1 = me() ) ORDER BY rand() limit 5'
-                }, function(res) {
-                    if (res.error_code) return;
-
-                    $("#friends-section").show();
-
-                    var fs = $("#friends-section #friends");
-
-                    fs.fadeOut(500, function() {
-                        fs.empty();
-                        _.each(res, function(f) {
-                            var fv = $(friendChallengeTemplate(f));
-                            fv.data('id', f.uid);
-                            fs.append(fv);
-                        });
-                        fs.fadeIn(500);
-                    })
-                }
-            );
+           
 
         }
 

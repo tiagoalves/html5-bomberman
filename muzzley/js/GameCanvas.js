@@ -28,13 +28,13 @@ define([
             this.world.map.gameCanvas = this;
 
             // canvas
-            this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
-            this.ctx = this.$canvas.get(0).getContext("2d");
+            //this.$canvas = this._canvas(VIEW_W * SQUARE_SIZE, VIEW_H * SQUARE_SIZE);
+            //this.ctx = this.$canvas.get(0).getContext("2d");
 
             this.world.$container.append(this.$canvas);
 
             // map layer
-            this.map = this._canvas( (VIEW_W+2) * SQUARE_SIZE, (VIEW_H+2) * SQUARE_SIZE).get(0);
+            // this.map = this._canvas( (VIEW_W+2) * SQUARE_SIZE, (VIEW_H+2) * SQUARE_SIZE).get(0);
 
             this.mapDirts = [];
 
@@ -135,9 +135,9 @@ define([
 
             var spr = this.sprCharacters[c.get('character')];
 
-            if (framey < 8)
-                this.ctx.drawImage(spr, framex * CHAR_W, framey*CHAR_H, CHAR_W, CHAR_H,
-                    x, y, CHAR_H, CHAR_H);
+            //if (framey < 8)
+                //this.ctx.drawImage(spr, framex * CHAR_W, framey*CHAR_H, CHAR_W, CHAR_H,
+                  //  x, y, CHAR_H, CHAR_H);
         },
 
         drawFlame: function(f) {
@@ -159,11 +159,12 @@ define([
             var x = f.get('x') * SQUARE_SIZE - this.viewport.xx;
             var y = f.get('y') * SQUARE_SIZE - this.viewport.yy;
 
+            /*
             this.ctx.drawImage(this.sprFlames,
                 frame*SQUARE_SIZE, f.get('type')*SQUARE_SIZE,
                 SQUARE_SIZE, SQUARE_SIZE,
                 x, y,
-                SQUARE_SIZE, SQUARE_SIZE);
+                SQUARE_SIZE, SQUARE_SIZE);*/
 
         },
 
@@ -175,11 +176,11 @@ define([
             var x = b.get('x') * SQUARE_SIZE - this.viewport.xx;
             var y = b.get('y') * SQUARE_SIZE - this.viewport.yy;
 
-            this.ctx.drawImage(this.sprBomb,
+            /*this.ctx.drawImage(this.sprBomb,
                 frame*SQUARE_SIZE, 0,
                 SQUARE_SIZE, SQUARE_SIZE,
                 x, y,
-                SQUARE_SIZE, SQUARE_SIZE);
+                SQUARE_SIZE, SQUARE_SIZE);*/
         },
 
         drawBreaking: function(b) {
@@ -194,11 +195,11 @@ define([
             var x = b.get('x') * SQUARE_SIZE - this.viewport.xx;
             var y = b.get('y') * SQUARE_SIZE - this.viewport.yy;
 
-            this.ctx.drawImage(this.sprTiles,
+            /*this.ctx.drawImage(this.sprTiles,
                 frame*SQUARE_SIZE, SQUARE_SIZE,
                 SQUARE_SIZE, SQUARE_SIZE,
                 x, y,
-                SQUARE_SIZE, SQUARE_SIZE);
+                SQUARE_SIZE, SQUARE_SIZE);*/
         },
 
 
@@ -243,7 +244,7 @@ define([
 
             if (!mp.initialized) return;
 
-            var ctx = this.map.getContext("2d");
+            //var ctx = this.map.getContext("2d");
             var tiles = this.sprTiles;
 
             var drawnTiles = 0;
@@ -274,12 +275,12 @@ define([
                     var hh = (vp.h) * SQUARE_SIZE;
 
                     // shift old map
-                    ctx.drawImage(this.map,
+                    /*ctx.drawImage(this.map,
                         0, 0,
                         ww, hh,
                         dx * SQUARE_SIZE, dy * SQUARE_SIZE,
                         ww, hh
-                    )
+                    )*/
 
                     if (dx > 0) this.mapDirty(x + dx - 1, 0, dx, 100);
                     if (dy > 0) this.mapDirty(0, y + dy - 1, 100, dy);
@@ -309,12 +310,12 @@ define([
 
                         var tile = map.getTile(cx, cy);
 
-                        ctx.drawImage(tiles,
+                        /*ctx.drawImage(tiles,
                             tile * SQUARE_SIZE, 0,
                             SQUARE_SIZE, SQUARE_SIZE,
                             (cx - x + 1) * SQUARE_SIZE, (cy - y + 1) * SQUARE_SIZE,
                             SQUARE_SIZE, SQUARE_SIZE);
-
+                        */
                         drawnTiles++;
                     }
                 }
@@ -330,10 +331,12 @@ define([
                 console.log("drawn " + drawnTiles);
 
             // FIXME
+            /*
             this.ctx.drawImage(this.map,
                 -ofx - SQUARE_SIZE,
                 -ofy - SQUARE_SIZE
             );
+            */
 
         }
 
