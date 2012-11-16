@@ -138,7 +138,7 @@ define([
         onPlayerUpdated: function(d) {
             var c = this.peers[d.id];
             if (!c) {
-                console.log("Update from unknown #"+ d.id);
+                //console.log("Update from unknown #"+ d.id);
                 return;
             }
 
@@ -153,7 +153,7 @@ define([
         onPlayerDying: function(d) {
             var c = this.peers[d.id];
             if (!c) {
-                console.log("Update from unknown #"+ d.id);
+                //console.log("Update from unknown #"+ d.id);
                 return;
             }
             console.log("Dying", d);

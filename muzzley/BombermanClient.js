@@ -2,12 +2,11 @@ var util = require('util');
 var requirejs = require('requirejs');
 var KeySimulator = require('./KeySimulator');
 var $ = require('jquery');
+var EventEmitter = require('events').EventEmitter;
 io = require('socket.io-client');
 var jsdom = require('jsdom');
 document = jsdom.jsdom('<html><body></body></html>');
 window = document.createWindow();
-
-var keySimulator = new KeySimulator(document);
 
 //
 // Fix the supposedly global methods of the game but which are not because of CommonJS
@@ -23,7 +22,6 @@ chat = function() {};
 // Play sound...
 play = function() {};
 
-
 TILE_EMPTY = 0;
 TILE_BRICK = 1;
 TILE_SOLID = 2;
@@ -32,6 +30,9 @@ var BombermanClient = function (options) {
 
   options = options || {};
   var characters = ['john','joe','betty','mary'];
+
+  this.keySimulator = new KeySimulator();
+  var ks = this.keySimulator;
 
   requirejs.config(
     {
@@ -45,13 +46,13 @@ var BombermanClient = function (options) {
     }
   );
 
-
-
   requirejs([
     "jquery", "underscore", "backbone",
     "polyfills/jscript",
     "Game"
   ],function($, _, Backbone, core) {
+
+    console.log("====== STARTING A NEW GAME ==========");
 
     var startGame = function(/*e*/) {
       var name = options.name || 'John Doe';
@@ -64,7 +65,8 @@ var BombermanClient = function (options) {
           playerName: name,
           fbuid: undefined,
           character: character,
-          game: game
+          game: game,
+          keySimulator: ks
       });
     }
 
@@ -76,34 +78,8 @@ var BombermanClient = function (options) {
     });
   });
 
-/*
-  requirejs.config({
-    baseUrl: __dirname,
-    nodeRequire: require
-  });
-
-  requirejs(['js/app', 'js/Game'],
-    function (app, Game) {
-
-
-      console.log("app returned:");
-      console.log(arguments);
-      console.log(Game);
-    }
-  );
-*/
-
 }
 
-BombermanClient.prototype.keySimulator = keySimulator;
-
-setTimeout(function() {
-//  keySimulator.keydown(KeySimulator.UP);
-}, 1000);
-
-setTimeout(function() {
-//  keySimulator.keyup(KeySimulator.UP);
-//  keySimulator.keydown(KeySimulator.LEFT);
-}, 5000);
+//BombermanClient.prototype.keySimulator =  keySimulator;
 
 exports = module.exports = BombermanClient;

@@ -1,9 +1,10 @@
-var document = null;
+var EventEmitter = require('events').EventEmitter;
+var util = require('util');
 
-var KeySimulator = function(_document) {
-  document = _document;
-  setupDocumentKeyDown(document);
+var KeySimulator = function() {
+  EventEmitter.call(this);
 };
+util.inherits(KeySimulator, EventEmitter);
 
 KeySimulator.LEFT = 37;
 KeySimulator.UP = 38;
@@ -12,11 +13,11 @@ KeySimulator.DOWN = 40;
 KeySimulator.SPACE = 32;
 
 KeySimulator.prototype.keydown = function(code) {
-  document.keydown(getKeyEvent(code));
+  this.emit('keydown', getKeyEvent(code));
 };
 
 KeySimulator.prototype.keyup = function(code) {
-  document.keyup(getKeyEvent(code));
+  this.emit('keyup', getKeyEvent(code));
 };
 
 var getKeyEvent = function(code) {
@@ -26,20 +27,5 @@ var getKeyEvent = function(code) {
     preventDefault: function(){}
   };
 }
-
-var setupDocumentKeyDown = function(doc) {
-  // Set the keydown and keyup methods that handle and trigger
-  // the respective key events
-  ['keydown', 'keyup'].forEach(function (type) {
-    doc[type] = function(arg) {
-      if (typeof arg === "function") {
-        doc['on' + type] = arg;
-      } else if (typeof doc['on' + type] === "function") {
-        // Event fired, call the callback previously stored
-        doc['on' + type](arg);
-      }
-    };
-  });
-};
 
 exports = module.exports = KeySimulator;

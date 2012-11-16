@@ -20,6 +20,7 @@ define([
             $(window).resize(_.bind(this.layout, this));
 
             this.world = new World({ container: $("#view") });
+            this.keySimulator = opt.keySimulator;
 
             // create our player
             this.world.player = new Character({
@@ -39,7 +40,8 @@ define([
             this.local = new LocalManager({
                 document: $(document),
                 world: this.world,
-                network: this.networking
+                network: this.networking,
+                keySimulator: this.keySimulator
             });
 
             this.lastTime = getTicks();

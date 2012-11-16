@@ -74,7 +74,9 @@ define([
         },
 
         _getMap: function(x, y, arr) {
-            return arr[ (y - this.y) * this.w + (x - this.x) ];
+            if (arr) {
+                return arr[ (y - this.y) * this.w + (x - this.x) ];
+            }
         },
 
         _setMap: function(x, y, v, arr) {

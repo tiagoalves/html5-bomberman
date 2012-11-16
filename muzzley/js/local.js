@@ -28,6 +28,7 @@ define([
             this.$document = opt.document;
             this.world = opt.world;
             this.network = opt.network;
+            this.keySimulator = opt.keySimulator;
 
             this.me = this.world.player;
 
@@ -41,22 +42,25 @@ define([
             var parent= this;
 
             // keyboard handlers
-            //this.$document.keydown($.proxy(this.onKeyDown, this));
-            //this.$document.keyup($.proxy(this.onKeyUp, this));
+            this.$document.keydown($.proxy(this.onKeyDown, this));
+            this.$document.keyup($.proxy(this.onKeyUp, this));
 
             // keyboard handlers for node.js where the key events are sent
             // directly to the "document" DOM element with e.g. document.keydown({keyCode:UP})
-            this.$document.get(0).keydown($.proxy(this.onKeyDown, this));
-            this.$document.get(0).keyup($.proxy(this.onKeyUp, this));
+            //this.$document.get(0).keydown($.proxy(this.onKeyDown, this));
+            //this.$document.get(0).keyup($.proxy(this.onKeyUp, this));
 
-            // Node.js keyboard event handler
-            if (typeof keyEvent !== 'undefined') {
-                keyEvent.on('keydown', function (keyCode) {
-                    console.log("weeeeeeeee");
-                    var e = {keyCode:32};
-                    parent.onKeyDown(e);
-                });
-            }
+            this.keySimulator.on('keydown', $.proxy(this.onKeyDown, this))
+            this.keySimulator.on('keyup', $.proxy(this.onKeyUp, this))
+
+            // // Node.js keyboard event handler
+            // if (typeof keyEvent !== 'undefined') {
+            //     keyEvent.on('keydown', function (keyCode) {
+            //         console.log("weeeeeeeee");
+            //         var e = {keyCode:32};
+            //         parent.onKeyDown(e);
+            //     });
+            // }
             
         },
 
