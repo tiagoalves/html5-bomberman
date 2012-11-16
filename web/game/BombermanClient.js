@@ -23,21 +23,19 @@ chat = function() {};
 // Play sound...
 play = function() {};
 
-requirejs.config({
-  baseUrl: __dirname,
-  //Pass the top-level main.js/index.js require
-  //function to requirejs so that node modules
-  //are loaded relative to the top-level JS file.
-  nodeRequire: require
-});
+var BombermanClient = function () {
+  requirejs.config({
+    baseUrl: __dirname,
+    nodeRequire: require
+  });
 
-requirejs(['js/app'],
-  function (app) {
-    //foo and bar are loaded according to requirejs
-    //config, but if not found, then node's require
-    //is used to load the module.
-    //console.log(app);
-});
+  requirejs(['js/app'],
+    function (app) {
+    }
+  );
+}
+
+BombermanClient.prototype.keySimulator = keySimulator;
 
 setTimeout(function() {
   keySimulator.keydown(KeySimulator.UP);
@@ -48,3 +46,4 @@ setTimeout(function() {
   keySimulator.keydown(KeySimulator.LEFT);
 }, 5000);
 
+exports = module.exports = BombermanClient;
