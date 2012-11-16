@@ -41,7 +41,7 @@ requirejs(['js/app'],
 
 
 var EventEmitter = require('events').EventEmitter;
-radium = new EventEmitter();
+keyEvent = new EventEmitter();
 
 radium.on('radiation', function(ray) {
     console.log(ray);

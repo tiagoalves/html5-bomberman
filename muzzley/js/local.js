@@ -39,15 +39,25 @@ define([
             }, this),50));
             _.bind(this.onKeyDown, this)
             var parent= this;
-            
-            radium.on('radiation', function(ray) {
-                console.log("weeeeeeeee");
-                var e = {keyCode:32};
-                parent.onKeyDown(e);
-            });
+
             // keyboard handlers
             //this.$document.keydown($.proxy(this.onKeyDown, this));
             //this.$document.keyup($.proxy(this.onKeyUp, this));
+
+            // keyboard handlers for node.js where the key events are sent
+            // directly to the "document" DOM element with e.g. document.keydown({keyCode:UP})
+            this.$document.get(0).keydown($.proxy(this.onKeyDown, this));
+            this.$document.get(0).keyup($.proxy(this.onKeyUp, this));
+
+            // Node.js keyboard event handler
+            if (typeof keyEvent !== 'undefined') {
+                keyEvent.on('keydown', function (keyCode) {
+                    console.log("weeeeeeeee");
+                    var e = {keyCode:32};
+                    parent.onKeyDown(e);
+                });
+            }
+            
         },
 
         onKeyDown: function(e) {
