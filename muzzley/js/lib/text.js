@@ -21,7 +21,7 @@
     define(function () {
         var text, get, fs;
 
-        if (typeof window !== "undefined" && window.navigator && window.document) {
+        if (false && typeof window !== "undefined" && window.navigator && window.document) {
             get = function (url, callback) {
                 var xhr = text.createXhr();
                 xhr.open('GET', url, true);

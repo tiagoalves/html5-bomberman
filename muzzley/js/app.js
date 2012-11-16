@@ -8,8 +8,7 @@ require.config(
         baseUrl: "js",
         paths: {
             "backbone": "lib/backbone",
-            "underscore": "lib/underscore",
-            "text": "lib/text"
+            "underscore": "lib/underscore"
         },
         locale: "en"
     }
@@ -19,7 +18,6 @@ require.config(
 require([
     "jquery", "underscore", "backbone",
     "polyfills/jscript",
-    "facebook",
     "lobby"
 ],function($, _, Backbone, core) {
 
@@ -30,7 +28,7 @@ require([
     $(function() {
 
         new LobbyView({el: $("#lobby")});
-
+    
         $("#loading").hide();
 
 

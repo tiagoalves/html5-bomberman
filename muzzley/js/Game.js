@@ -3,7 +3,7 @@
 define([
     "jquery", "underscore", "backbone",
 
-    "text!../html/game.html",
+    
 
     "local",
     "Networking",

@@ -2,32 +2,24 @@
 
 define([
     "jquery", "underscore", "backbone",
-
-    "text!../html/lobby.html",
-    "facebook",
-
     "Game"
-], function($, _, Backbone, tpl, fb) {
+], function($, _, Backbone) {
 
 
     LobbyView = Backbone.View.extend({
 
         initialize: function() {
-            this.$el.html(_.template(tpl));
+            //this.$el.html(_.template(tpl));
 
             this.initUsername();
 
-            this.lobby = io.connect('/lobby');
+            this.lobby = io.connect('https://localhost:8443/lobby');
 
             this.lobby.on('connect', _.bind(this.lobbyConnect, this));
             this.lobby.on('disconnect', _.bind(this.lobbyDisconnect, this));
 
             this.lobby.on('list-games', _.bind(this.onGamesList, this));
 
-            fb.on("auth", _.bind(this.gotFacebookUser, this));
-            fb.on("not-logged", function() {
-                $("#facebook-login").show();
-            });
 
             var frame = 0;
             setInterval(function() {
@@ -81,8 +73,8 @@ define([
         initUsername: function() {
             var $userid = $('#userid');
 
-            var defaultUser = localStorage.getItem("userName");
-            var chr = localStorage.getItem("character");
+            var defaultUser = undefined;
+            var chr = undefined;
 
             if (defaultUser)
                 $userid.val(defaultUser);
@@ -102,8 +94,8 @@ define([
             var game = $(e.currentTarget).data("game");
             var character = $(".character-select li.selected div").attr("class");
 
-            localStorage.setItem("userName", name);
-            localStorage.setItem("character", character);
+            //localStorage.setItem("userName", name);
+            //localStorage.setItem("character", character);
 
             console.log("Joining " + game);
 
