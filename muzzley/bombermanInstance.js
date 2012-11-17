@@ -3,14 +3,22 @@ var bomberman = new BombermanClient();
 
 
 var suicideTimer = null;
+var suicide = function () {
+  console.log("Killing myself"); 
+  process.disconnect();
+  process.exit();
+};
 // If in 20s no message is received, exit
 var postponeSuicide = function() {
   if (suicideTimer) {
     clearTimeout(suicideTimer);
   }
-  suicideTimer = setTimeout(process.exit, 20000);
+  suicideTimer = setTimeout(suicide, 20000);
 };
 postponeSuicide();
+
+
+process.on('uncaughtException', suicide);
 
 process.on('message', function (response) {
   if (response.direction && response.key) {
