@@ -33,7 +33,7 @@ require([
         //game: "game1"
         //playerName: "Tiago
 
-        var name = 'Tiago Alves';
+        var name = 'Game Master';
         var game = 'game1';
         var character = 'mary';
 

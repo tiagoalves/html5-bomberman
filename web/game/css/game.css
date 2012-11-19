@@ -1,4 +1,7 @@
 /* line 7, ../sass/game.scss */
+#game #muzzley-section header {
+  text-align: center;
+}
 #game #view {
   position: absolute;
   -moz-box-shadow: black 0px 3px 20px;

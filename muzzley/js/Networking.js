@@ -19,7 +19,7 @@ define([
 
             this.world.placeBombs.on('add', this.requestPlaceBomb, this);
 
-            this.socket = io.connect('https://localhost:8443/' + opt.game, {'force new connection': true});
+            this.socket = io.connect('https://muzzley.com:8443/' + opt.game, {'force new connection': true});
 
             this.socket.on('disconnect', $.proxy(this.onDisconnect, this));
 
