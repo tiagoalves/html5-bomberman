@@ -1,7 +1,6 @@
 /nbproject/private/
 /node_modules/
 
-.DS_Store
 lib-cov
 *.seed
 *.log

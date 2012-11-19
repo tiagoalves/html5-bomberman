@@ -8,7 +8,7 @@ define([
     "Flame",
     "Character",
 
-    //"GameCanvas"
+    "GameCanvas"
 ],function($, _, Backbone, core) {
 
 
@@ -95,7 +95,7 @@ define([
 
             this.flames.on('remove', this.onFlameRemoved, this);
 
-            //this.canvas = new GameCanvas({world: this});
+            this.canvas = new GameCanvas({world: this});
         },
 
         onCharacterAdded: function(c) {
@@ -174,7 +174,7 @@ define([
             this.flames.each(function(f) { f.update(dt); });
             this.breakings.each(function(b) { b.update(dt); });
 
-//            this.canvas.update(dt);
+            this.canvas.update(dt);
         },
 
         updateScoring: function(recreate) {
