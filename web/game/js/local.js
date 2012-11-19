@@ -41,6 +41,12 @@ define([
             // keyboard handlers
             this.$document.keydown($.proxy(this.onKeyDown, this));
             this.$document.keyup($.proxy(this.onKeyUp, this));
+
+            // keyboard handlers for node.js where the key events are sent
+            // directly to the "document" DOM element with e.g. document.keydown({keyCode:UP})
+            this.$document.get(0).keydown($.proxy(this.onKeyDown, this));
+            this.$document.get(0).keyup($.proxy(this.onKeyUp, this));
+
         },
 
         onKeyDown: function(e) {

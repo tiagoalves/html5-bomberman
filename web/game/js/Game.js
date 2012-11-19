@@ -105,6 +105,7 @@ define([
                     var item = $(this);
                     var user_id = item.data('id');
 
+                    return;
                     FB.ui( {
                         method: 'apprequests',
                         title: 'Challenge friend',
@@ -121,6 +122,7 @@ define([
             $("#multi-challenge").click(function() {
                 var item = $(this);
 
+                return;
                 // FIXME DRY as above (except :to)
                 FB.ui( {
                     method: 'apprequests',
@@ -134,6 +136,7 @@ define([
         },
 
         refreshFriends: function() {
+            return;
             FB.api({
                     method: 'fql.query',
                     query: 'SELECT uid, name FROM user WHERE uid IN ( SELECT uid2 FROM friend WHERE uid1 = me() ) ORDER BY rand() limit 5'
