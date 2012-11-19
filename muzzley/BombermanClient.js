@@ -55,7 +55,7 @@ var BombermanClient = function (options) {
     console.log("====== STARTING A NEW GAME ==========");
 
     var startGame = function(/*e*/) {
-      var name = options.name || 'John Doe';
+      var name = options.name || 'Codebits';
       var game = options.game || 'game1';
       var character = characters[Math.floor(Math.random()*characters.length)];
 
